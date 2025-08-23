@@ -31,6 +31,20 @@ void bubblesort(int a[],int n){
     }
 }
 
+//recursive bubble sort
+void rbsort(int a[],int n){
+    if(n==1) return;
+    int didswap=0; //tweak to reduce time complexity for some cases
+    for(int j=0;j<=n-2;j++){
+        if(a[j]>a[j+1]){
+        swap(a[j],a[j+1]);
+        didswap=1;
+        }
+    }
+    if (didswap==0) return;
+    rbsort(a,n-1); // recursion call for next round
+}
+
 //insertion sort
 void insertionsort(int a[],int n){
     for(int i=0;i<n-1;i++){
@@ -43,7 +57,17 @@ void insertionsort(int a[],int n){
             j--;
         }
     }
+}
 
+//recursive insertion sort
+void rinsort(int a[],int i,int n){
+    if(i==n) return;
+    int j=i;
+    while(j>0 && a[j-1]>a[j]){
+        swap(a[j-1],a[j]);
+        j--;
+    }
+    rinsort(a,i+1,n);
 }
 
 //mainnn
@@ -56,7 +80,7 @@ int main(){
         cin>>a[i];
     }
     //function for selection osrt
-    insertionsort(a,n);
+    rinsort(a,0,n);
 
     //sorted array
     for(int i=0;i<n;i++){
